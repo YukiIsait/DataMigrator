@@ -45,15 +45,13 @@ namespace Win32 {
             return false;
         }
         targetDirNtPath.resize(targetDirNtPath.size() - 1);
-        HANDLE reparsePoint = ::CreateFileW(junctionPoint.data(), GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
-                                            FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, nullptr);
+        HANDLE reparsePoint = ::CreateFileW(junctionPoint.data(), GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, nullptr);
         if (reparsePoint == INVALID_HANDLE_VALUE) {
             return false;
         }
         std::pair<std::unique_ptr<ReparseDataBuffer>, size_t> reparseData = CreateMountPointReparseDataBuffer(targetDirNtPath, L"");
         DWORD bytesReturned;
-        BOOL ret = ::DeviceIoControl(reparsePoint, FSCTL_SET_REPARSE_POINT, reparseData.first.get(),
-                                     static_cast<DWORD>(reparseData.second), nullptr, 0, &bytesReturned, nullptr);
+        BOOL ret = ::DeviceIoControl(reparsePoint, FSCTL_SET_REPARSE_POINT, reparseData.first.get(), static_cast<DWORD>(reparseData.second), nullptr, 0, &bytesReturned, nullptr);
         ::CloseHandle(reparsePoint);
         return ret;
     }
@@ -70,15 +68,15 @@ namespace Win32 {
     }
 
     bool JunctionPoint::Unmount(const std::wstring& junctionPoint) {
-        ReparseDataBuffer reparseDataBuffer = { .ReparseTag = IO_REPARSE_TAG_MOUNT_POINT };
-        HANDLE reparsePoint = ::CreateFileW(junctionPoint.data(), GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
-                                            FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, nullptr);
+        ReparseDataBuffer reparseDataBuffer = {
+            .ReparseTag = IO_REPARSE_TAG_MOUNT_POINT
+        };
+        HANDLE reparsePoint = ::CreateFileW(junctionPoint.data(), GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, nullptr);
         if (reparsePoint == INVALID_HANDLE_VALUE) {
             return false;
         }
         DWORD bytesReturned;
-        BOOL ret = ::DeviceIoControl(reparsePoint, FSCTL_DELETE_REPARSE_POINT, &reparseDataBuffer,
-                                     UFIELD_OFFSET(ReparseDataBuffer, MountPointReparseBuffer), nullptr, 0, &bytesReturned, nullptr);
+        BOOL ret = ::DeviceIoControl(reparsePoint, FSCTL_DELETE_REPARSE_POINT, &reparseDataBuffer, UFIELD_OFFSET(ReparseDataBuffer, MountPointReparseBuffer), nullptr, 0, &bytesReturned, nullptr);
         ::CloseHandle(reparsePoint);
         return ret;
     }
@@ -91,8 +89,7 @@ namespace Win32 {
     }
 
     bool JunctionPoint::IsJunctionPoint(uint32_t attributes) {
-        if (attributes == INVALID_FILE_ATTRIBUTES ||
-            (attributes & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) != (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) {
+        if (attributes == INVALID_FILE_ATTRIBUTES || (attributes & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) != (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) {
             return false;
         }
         return true;

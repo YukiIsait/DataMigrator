@@ -23,8 +23,7 @@ namespace MigrationTool {
         return path.substr(0, start) + *variableValue + path.substr(end + 1);
     }
 
-    std::optional<std::wstring> GetMigrationPath(const std::wstring& currentPath, const std::wstring& migrationInfoLine,
-                                                 MigrationInfoEnum migrationInfoEnum) {
+    std::optional<std::wstring> GetMigrationPath(const std::wstring& currentPath, const std::wstring& migrationInfoLine, MigrationInfoEnum migrationInfoEnum) {
         std::optional<std::wstring> path;
         path = StringUtil::SplitAndGet(migrationInfoLine, L'|', static_cast<size_t>(migrationInfoEnum));
         if (!path) {
@@ -69,7 +68,11 @@ namespace MigrationTool {
         if (!keepingRule) {
             return std::nullopt;
         }
-        return MigrationInfo { std::move(*destination), std::move(*source), *keepingRule };
+        return MigrationInfo {
+            std::move(*destination),
+            std::move(*source),
+            *keepingRule
+        };
     }
 
     bool Migrate(const MigrationInfo& migrationInfo) {

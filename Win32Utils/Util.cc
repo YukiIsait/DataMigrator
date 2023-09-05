@@ -89,7 +89,11 @@ namespace Win32 {
             return false;
         }
         fullPath->resize(fullPath->size() + 1);
-        SHFILEOPSTRUCTW fileOp = { .wFunc = FO_DELETE, .pFrom = fullPath->data(), .fFlags = FOF_ALLOWUNDO };
+        SHFILEOPSTRUCTW fileOp = {
+            .wFunc = FO_DELETE,
+            .pFrom = fullPath->data(),
+            .fFlags = FOF_ALLOWUNDO
+        };
         return !::SHFileOperationW(&fileOp);
     }
 
@@ -105,7 +109,10 @@ namespace Win32 {
         sourceFullPath->resize(sourceFullPath->size() + 1);
         destinationFullPath->resize(destinationFullPath->size() + 1);
         SHFILEOPSTRUCTW fileOp = {
-            .wFunc = FO_MOVE, .pFrom = sourceFullPath->data(), .pTo = destinationFullPath->data(), .fFlags = FOF_NOCONFIRMMKDIR
+            .wFunc = FO_MOVE,
+            .pFrom = sourceFullPath->data(),
+            .pTo = destinationFullPath->data(),
+            .fFlags = FOF_NOCONFIRMMKDIR
         };
         return !::SHFileOperationW(&fileOp);
     }
