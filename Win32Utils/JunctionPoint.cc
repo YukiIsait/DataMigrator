@@ -88,14 +88,14 @@ namespace Win32 {
         return ::RemoveDirectoryW(junctionPoint.data());
     }
 
-    bool JunctionPoint::IsJunctionPoint(uint32_t attributes) {
-        if (attributes == INVALID_FILE_ATTRIBUTES || (attributes & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) != (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) {
+    std::optional<bool> JunctionPoint::IsJunctionPoint(const std::wstring& path) {
+        DWORD attributes = ::GetFileAttributesW(path.data());
+        if (attributes == INVALID_FILE_ATTRIBUTES) {
+            return std::nullopt;
+        }
+        if ((attributes & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) != (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) {
             return false;
         }
         return true;
-    }
-
-    bool JunctionPoint::IsJunctionPoint(const std::wstring& path) {
-        return IsJunctionPoint(::GetFileAttributesW(path.data()));
     }
 }

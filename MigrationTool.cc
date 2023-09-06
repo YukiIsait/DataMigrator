@@ -88,7 +88,7 @@ namespace MigrationTool {
                 }
                 break;
             case KeepingRule::KeepSource:
-                if (Win32::JunctionPoint::IsJunctionPoint(migrationInfo.source)) {
+                if (Win32::JunctionPoint::IsJunctionPoint(migrationInfo.source).value_or(true)) {
                     return false;
                 }
                 Win32::Util::RemoveDirectory(migrationInfo.destination);
