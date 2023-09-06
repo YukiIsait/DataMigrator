@@ -131,7 +131,7 @@ namespace Win32 {
                 fileSize -= 2;
                 std::wstring buffer(fileSize / sizeof(wchar_t), 0);
                 if (::ReadFile(hFile, buffer.data(), fileSize, &readSize, nullptr) && fileSize == readSize) {
-                    result = buffer;
+                    result = std::move(buffer);
                 }
             }
         }
