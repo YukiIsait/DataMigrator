@@ -8,7 +8,7 @@ The Directory Migrator is a practical tool for conveniently and quickly migratin
 
 2. Right-click on `RegisterToContextMenu.bat` and select `Run as administrator`.
 
-3. Save the list of directories that need to be migrated as a text file and rename the extension to `.mil`. To demonstrate the file format for migrating Adobe files.
+3. Save the list of directories that need to be migrated as a `UTF-16 LE` encoded text file and rename the extension to `.mil`. The following demonstrate the file format for migrating Adobe files.
 
 ```
 :Destinations              | Sources                                | Keeping Rules
