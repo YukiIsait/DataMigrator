@@ -35,10 +35,11 @@ namespace Win32 {
 
 #undef PathCombine
     std::optional<std::wstring> Util::PathCombine(const std::wstring& pathIn, const std::wstring& pathMore) {
-        wchar_t buffer[MAX_PATH];
-        if (!::PathCombineW(buffer, pathIn.data(), pathMore.data())) {
+        std::wstring buffer(MAX_PATH, 0);
+        if (!::PathCombineW(buffer.data(), pathIn.data(), pathMore.data())) {
             return std::nullopt;
         }
+        buffer.resize(buffer.find((wchar_t) 0));
         return buffer;
     }
 
