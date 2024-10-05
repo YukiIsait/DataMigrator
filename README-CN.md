@@ -37,7 +37,7 @@ Operation=Map
 
 ### MappingDirectory 和 StorageDirectory
 
-在路径中使用尖括号 <> 来访问环境变量。以下两个路径是等效的。
+在路径中使用尖括号 `<>` 来访问环境变量。以下两个路径是等效的。
 
 ```
 <ProgramFiles(x86)>\Common Files\Adobe
