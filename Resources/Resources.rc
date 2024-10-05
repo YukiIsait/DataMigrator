@@ -14,7 +14,7 @@ BEGIN
         BEGIN
             VALUE "FileDescription", "Directory Migrator"
             VALUE "FileVersion", "1.0.0.0"
-            VALUE "LegalCopyright", "Inari Tsubaki"
+            VALUE "LegalCopyright", "Copyright © 2024 YukiIsait"
             VALUE "ProductName", "DirectoryMigrator"
             VALUE "ProductVersion", "1.0.0.0"
         END
