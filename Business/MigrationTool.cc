@@ -4,6 +4,7 @@
 #include "Common/FileUtil.h"
 #include "Common/JunctionPointUtil.h"
 #include "Common/Profile.h"
+#include "Common/PathUtil.h"
 
 namespace Business {
     static void Migrate(MigrationInfo& migrationInfo) {

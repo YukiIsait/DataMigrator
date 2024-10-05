@@ -21,6 +21,6 @@ namespace Business {
     private:
         static Operation ResolveOperation(const std::wstring& operation);
         static std::wstring ResolveOperation(Operation operation);
-        static std::wstring ResolvePath(const std::wstring& path);
+        std::wstring ResolvePath(const Win32::Profile& profile, const std::wstring& section, const std::wstring& key);
     };
 }

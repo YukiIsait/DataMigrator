@@ -1,11 +1,12 @@
 ﻿#include <stdexcept>
 #include "MigrationInfo.h"
 #include "Common/ProcessUtil.h"
+#include "Common/PathUtil.h"
 
 namespace Business {
-    MigrationInfo::MigrationInfo(const std::wstring& mappingDirectory, const std::wstring& storageDirectory, Operation operation): mappingDirectory(ResolvePath(mappingDirectory)), storageDirectory(ResolvePath(storageDirectory)), operation(operation) {}
+    MigrationInfo::MigrationInfo(const std::wstring& mappingDirectory, const std::wstring& storageDirectory, Operation operation): mappingDirectory(mappingDirectory), storageDirectory(storageDirectory), operation(operation) {}
 
-    MigrationInfo::MigrationInfo(const Win32::Profile& profile, const std::wstring& section): MigrationInfo(profile.ReadString(section, L"MappingDirectory"), profile.ReadString(section, L"StorageDirectory"), ResolveOperation(profile.ReadString(section, L"Operation"))) {}
+    MigrationInfo::MigrationInfo(const Win32::Profile& profile, const std::wstring& section): MigrationInfo(ResolvePath(profile, section, L"MappingDirectory"), ResolvePath(profile, section, L"StorageDirectory"), ResolveOperation(profile.ReadString(section, L"Operation"))) {}
 
     void MigrationInfo::WriteOperationToProfile(const Win32::Profile& profile, const std::wstring& section) const {
         profile.WriteString(section, L"Operation", ResolveOperation(operation));
@@ -36,7 +37,8 @@ namespace Business {
         }
     }
 
-    std::wstring MigrationInfo::ResolvePath(const std::wstring& path) {
+    std::wstring MigrationInfo::ResolvePath(const Win32::Profile& profile, const std::wstring& section, const std::wstring& key) {
+        std::wstring path = profile.ReadString(section, key);
         std::wstring resolvedPath;
         size_t position = 0;
         while (true) {
@@ -55,6 +57,6 @@ namespace Business {
             resolvedPath.append(variableValue);
             position = closeBracket + 1;
         }
-        return resolvedPath;
+        return Win32::PathUtil::Combine(Win32::PathUtil::GetParent(*const_cast<Win32::Profile&>(profile)), resolvedPath);
     }
 }
