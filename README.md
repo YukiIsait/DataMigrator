@@ -1,12 +1,12 @@
-# Directory Migrator
+# Data Migrator
 
 🌍 **[简体中文](README-CN.md) | [English](README.md)**
 
-The Directory Migrator is a practical tool for conveniently and quickly migrating data files.
+The Data Migrator is a practical tool for conveniently and quickly migrating data files.
 
 ## Usage
 
-1. Save `DirectoryMigrator.exe` and `RegisterOrUnregister.bat` to a directory of your choice.
+1. Save `DataMigrator.exe` and `RegisterOrUnregister.bat` to a directory of your choice.
 
 2. Right-click on `RegisterOrUnregister.bat` and select "**Run as administrator**".
 

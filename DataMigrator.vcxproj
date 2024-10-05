@@ -22,7 +22,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{0ce9c5ae-0ed2-43ef-bc1b-b1acd37b85f6}</ProjectGuid>
-    <RootNamespace>DirectoryMigrator</RootNamespace>
+    <RootNamespace>DataMigrator</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

@@ -12,10 +12,10 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "FileDescription", "Directory Migrator"
+            VALUE "FileDescription", "Data Migrator"
             VALUE "FileVersion", "2.0.0.0"
             VALUE "LegalCopyright", "Copyright © 2024 YukiIsait"
-            VALUE "ProductName", "DirectoryMigrator"
+            VALUE "ProductName", "DataMigrator"
             VALUE "ProductVersion", "2.0.0.0"
         END
     END

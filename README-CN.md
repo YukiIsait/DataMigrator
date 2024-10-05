@@ -6,7 +6,7 @@
 
 ## 使用方法
 
-1. 将 `DirectoryMigrator.exe` 和 `RegisterOrUnregister.bat` 保存到你想要的目录中。
+1. 将 `DataMigrator.exe` 和 `RegisterOrUnregister.bat` 保存到你想要的目录中。
 
 2. 右键点击 `RegisterOrUnregister.bat` 并选择“**以管理员身份运行**”。
 
