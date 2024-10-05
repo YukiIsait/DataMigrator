@@ -9,6 +9,11 @@
 
 int Win32::EntryPoint::Main(const std::vector<std::wstring>& args) {
     try {
+        if (Win32::MessageBox::Show(L"Do you want to proceed with the migration?", L"Directory Migrator",
+                                    static_cast<uint32_t>(Win32::MessageBox::ButtonType::YesNo) |
+                                        static_cast<uint32_t>(Win32::MessageBox::IconType::Information)) == Win32::MessageBox::ReturnCode::No) {
+            return 0;
+        }
         std::optional<std::wstring> profileFileName;
         switch (args.size()) {
             case 0:
