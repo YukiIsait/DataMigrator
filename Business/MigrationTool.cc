@@ -61,7 +61,8 @@ namespace Business {
                 throw std::runtime_error("Invalid migration operation.");
         }
         // 创建映射目录并进行映射
-        Win32::JunctionPointUtil::Create(migrationInfo.mappingDirectory, migrationInfo.storageDirectory);
+        Win32::FileUtil::CreateDirectoryTree(migrationInfo.mappingDirectory);
+        Win32::JunctionPointUtil::Mount(migrationInfo.mappingDirectory, migrationInfo.storageDirectory);
     }
 
     void MigrationTool::Migrate(const Win32::Profile& profile) {
