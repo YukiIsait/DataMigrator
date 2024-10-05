@@ -47,7 +47,7 @@ namespace Business {
                 }
                 // 保证存储目录不存在
                 if (Win32::FileUtil::Exists(migrationInfo.storageDirectory)) {
-                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.storageDirectory, false, true);
+                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.storageDirectory);
                 }
                 // 映射目录存在则将其迁移到存储目录，不存在则创建一个存储目录
                 if (Win32::FileUtil::Exists(migrationInfo.mappingDirectory)) {
@@ -61,7 +61,7 @@ namespace Business {
             case MigrationInfo::Operation::Map: // 仅清空映射目录
                 // 保证映射目录不存在
                 if (Win32::FileUtil::Exists(migrationInfo.mappingDirectory)) {
-                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.mappingDirectory, false, true);
+                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.mappingDirectory);
                 }
                 // 保证存储目录存在
                 if (!Win32::FileUtil::Exists(migrationInfo.storageDirectory)) {
@@ -71,11 +71,11 @@ namespace Business {
             case MigrationInfo::Operation::Erase: // 全部清空
                 // 保证映射目录不存在
                 if (Win32::FileUtil::Exists(migrationInfo.mappingDirectory)) {
-                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.mappingDirectory, false, true);
+                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.mappingDirectory);
                 }
                 // 保证存储目录存在并为空
                 if (Win32::FileUtil::Exists(migrationInfo.storageDirectory)) {
-                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.storageDirectory, false, true);
+                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.storageDirectory);
                 }
                 Win32::FileUtil::CreateDirectoryTree(migrationInfo.storageDirectory);
                 break;
