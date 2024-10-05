@@ -1,6 +1,4 @@
 ﻿#include <Windows.h>
-#include <Shlwapi.h>
-#include <memory>
 #include "JunctionPointUtil.h"
 #include "Exception.h"
 #include "Handle.hh"
