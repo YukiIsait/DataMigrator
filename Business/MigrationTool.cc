@@ -1,34 +1,11 @@
 ﻿#include <stdexcept>
 #include "MigrationTool.h"
 #include "MigrationInfo.h"
-#include "Common/ProcessUtil.h"
 #include "Common/FileUtil.h"
 #include "Common/JunctionPointUtil.h"
 #include "Common/Profile.h"
 
 namespace Business {
-    static std::wstring ResolvePath(const std::wstring& path) {
-        std::wstring resolvedPath;
-        size_t position = 0;
-        while (true) {
-            size_t openBracket = path.find(L'<', position);
-            if (openBracket == std::wstring::npos) {
-                resolvedPath.append(path.substr(position));
-                break;
-            }
-            resolvedPath.append(path.substr(position, openBracket - position));
-            size_t closeBracket = path.find(L'>', openBracket + 1);
-            if (closeBracket == std::wstring::npos) {
-                throw std::runtime_error("Mismatched brackets in environment variable.");
-            }
-            std::wstring variableName = path.substr(openBracket + 1, closeBracket - openBracket - 1);
-            std::wstring variableValue = Win32::ProcessUtil::GetEnvironment(variableName);
-            resolvedPath.append(variableValue);
-            position = closeBracket + 1;
-        }
-        return resolvedPath;
-    }
-
     static void Migrate(MigrationInfo& migrationInfo) {
         // 保证映射路径不是一个文件
         if ((Win32::FileUtil::Exists(migrationInfo.mappingDirectory) && !Win32::FileUtil::IsDirectory(migrationInfo.mappingDirectory))) {
@@ -91,7 +68,7 @@ namespace Business {
         for (const std::wstring& section : sections) {
             MigrationInfo migrationInfo(profile, section);
             Migrate(migrationInfo);
-            migrationInfo.WriteToProfile(profile, section);
+            migrationInfo.WriteOperationToProfile(profile, section);
         }
     }
 }
