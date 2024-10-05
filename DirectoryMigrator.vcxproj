@@ -66,10 +66,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -78,12 +86,12 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <ExceptionHandling>false</ExceptionHandling>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Shlwapi.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalDependencies>Shlwapi.lib;Shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -97,14 +105,14 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Shlwapi.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalDependencies>Shlwapi.lib;Shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -115,12 +123,12 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <ExceptionHandling>false</ExceptionHandling>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Shlwapi.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalDependencies>Shlwapi.lib;Shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -134,32 +142,16 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Shlwapi.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalDependencies>Shlwapi.lib;Shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="DirectoryMigrator.cc" />
-    <ClCompile Include="Win32Utils\EntryPoint.cc" />
-    <ClCompile Include="Win32Utils\JunctionPoint.cc" />
-    <ClCompile Include="MigrationTool.cc" />
-    <ClCompile Include="Win32Utils\MessageBox.cc" />
-    <ClCompile Include="Win32Utils\Util.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Win32Utils\EntryPoint.h" />
-    <ClInclude Include="Win32Utils\JunctionPoint.h" />
-    <ClInclude Include="MigrationTool.h" />
-    <ClInclude Include="CommonUtils\StringUtil.hh" />
-    <ClInclude Include="Win32Utils\MessageBox.h" />
-    <ClInclude Include="Win32Utils\Util.h" />
-  </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Resources.rc" />
   </ItemGroup>
@@ -168,6 +160,35 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Resources\Manifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Business\MigrationInfo.cc" />
+    <ClCompile Include="Business\MigrationTool.cc" />
+    <ClCompile Include="Common\EntryPoint.cc" />
+    <ClCompile Include="Common\Exception.cc" />
+    <ClCompile Include="Common\FileUtil.cc" />
+    <ClCompile Include="Common\Handle.cc" />
+    <ClCompile Include="Common\JunctionPointUtil.cc" />
+    <ClCompile Include="Common\MessageBox.cc" />
+    <ClCompile Include="Common\PathUtil.cc" />
+    <ClCompile Include="Common\ProcessUtil.cc" />
+    <ClCompile Include="Common\Profile.cc" />
+    <ClCompile Include="Common\ProfileUtil.cc" />
+    <ClCompile Include="Main.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Business\MigrationInfo.h" />
+    <ClInclude Include="Business\MigrationTool.h" />
+    <ClInclude Include="Common\EntryPoint.h" />
+    <ClInclude Include="Common\Exception.h" />
+    <ClInclude Include="Common\FileUtil.h" />
+    <ClInclude Include="Common\Handle.hh" />
+    <ClInclude Include="Common\JunctionPointUtil.h" />
+    <ClInclude Include="Common\MessageBox.h" />
+    <ClInclude Include="Common\PathUtil.h" />
+    <ClInclude Include="Common\ProcessUtil.h" />
+    <ClInclude Include="Common\Profile.h" />
+    <ClInclude Include="Common\StringUtil.hh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

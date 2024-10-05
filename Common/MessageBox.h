@@ -1,9 +1,10 @@
 ﻿#pragma once
 #include <string>
 
+#undef MessageBox
+
 namespace Win32 {
-    class MessageBox {
-    public:
+    namespace MessageBox {
         enum class ButtonType : uint32_t {
             Ok = 0x00000000L,
             OkCancel = 0x00000001L,
@@ -14,12 +15,14 @@ namespace Win32 {
             CancelTryContinue = 0x00000006L,
             Help = 0x00004000L
         };
+
         enum class DefaultButton : uint32_t {
             Button1 = 0x00000000L,
             Button2 = 0x00000100L,
             Button3 = 0x00000200L,
             Button4 = 0x00000300L
         };
+
         enum class IconType : uint32_t {
             Hand = 0x00000010L,
             Stop = 0x00000010L,
@@ -30,11 +33,13 @@ namespace Win32 {
             Asterisk = 0x00000040L,
             Information = 0x00000040L
         };
+
         enum class DialogModality : uint32_t {
             Application = 0x00000000L,
             System = 0x00001000L,
             TaskModal = 0x00002000L
         };
+
         enum class OtherOption : uint32_t {
             DefaultDesktopOnly = 0x00020000L,
             Right = 0x00080000L,
@@ -43,6 +48,7 @@ namespace Win32 {
             TopMost = 0x00040000L,
             ServiceNotification = 0x00200000L
         };
+
         enum class ReturnCode : int {
             Abort = 3,
             Cancel = 2,
@@ -54,7 +60,10 @@ namespace Win32 {
             TryAgain = 10,
             Yes = 6
         };
-        static ReturnCode Show(void* wnd, const std::wstring& message, const std::wstring& title, uint32_t type);
-        static ReturnCode Show(const std::wstring& message, const std::wstring& title, uint32_t type);
-    };
+
+        ReturnCode Show(void* wnd, const std::wstring& message, const std::wstring& title, uint32_t type);
+        ReturnCode Show(void* wnd, const std::string& message, const std::string& title, uint32_t type);
+        ReturnCode Show(const std::wstring& message, const std::wstring& title, uint32_t type);
+        ReturnCode Show(const std::string& message, const std::string& title, uint32_t type);
+    }
 }

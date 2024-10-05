@@ -15,46 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DirectoryMigrator.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MigrationTool.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32Utils\JunctionPoint.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32Utils\EntryPoint.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32Utils\MessageBox.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32Utils\Util.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Win32Utils\Util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CommonUtils\StringUtil.hh">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MigrationTool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32Utils\JunctionPoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32Utils\EntryPoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32Utils\MessageBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="Resources\Resources.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
@@ -68,5 +28,84 @@
     <Xml Include="Resources\Manifest.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Business\MigrationInfo.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\MigrationTool.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\EntryPoint.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Exception.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\FileUtil.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Handle.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\JunctionPointUtil.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\MessageBox.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PathUtil.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ProcessUtil.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Profile.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ProfileUtil.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Business\MigrationInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\MigrationTool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\EntryPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FileUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Handle.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\JunctionPointUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\MessageBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PathUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ProcessUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Profile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\StringUtil.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

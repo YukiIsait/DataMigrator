@@ -1,37 +1,41 @@
 # Directory Migrator
 
+🌍 **[简体中文](README-CN.md) | [English](README.md)**
+
 The Directory Migrator is a practical tool for conveniently and quickly migrating data files.
 
 ## Usage
 
-1. Save `DirectoryMigrator.exe` and `RegisterToContextMenu.bat` to a directory of your choice.
+1. Save `DirectoryMigrator.exe` and `RegisterOrUnregister.bat` to a directory of your choice.
 
-2. Right-click on `RegisterToContextMenu.bat` and select `Run as administrator`.
+2. Right-click on `RegisterOrUnregister.bat` and select "**Run as administrator**".
 
-3. Save the list of directories that need to be migrated as a `UTF-16 LE` encoded text file and rename the extension to `.mil`. The following demonstrate the file format for migrating Adobe files.
-
-```
-:Destinations              | Sources                                | Keeping Rules
-.\AppData\Roaming          | <AppData>\Adobe                        | KeepSource
-.\AppData\Local            | <LocalAppData>\Adobe                   | KeepSource
-.\ProgramData              | <ProgramData>\Adobe                    | KeepSource
-.\ProgramFiles\CommonFiles | <ProgramFiles(x86)>\Common Files\Adobe | KeepSource
-.\ProgramFiles\x64         | <ProgramFiles>\Adobe                   | KeepSource
-```
-
-4. Double-click on your `.mil` file and enjoy! If the directories you are migrating require elevated permissions, such as `%ProgramFiles%`, you will need to right-click and select `Run as administrator` to ensure the necessary access privileges.
-
-## Format
-
-## Comments
-
-Use the colon `:` at the beginning of a line to add comments.
+3. Save the list of directories that need to be migrated as `.ini` file and rename the extension to `.mil`. The following demonstrate the file format for migrating SSH and VSCode data.
 
 ```
-: This line is commented out.
+[SSH]
+MappingDirectory=<UserProfile>\.ssh
+StorageDirectory=SSH
+Operation=Move
+
+[VSCodeExtensions]
+MappingDirectory=<UserProfile>\.vscode
+StorageDirectory=VSCode\ExtensionsDir
+Operation=Map
+
+[VSCodeUserData]
+MappingDirectory=<AppData>\Code
+StorageDirectory=VSCode\UserDataDir
+Operation=Map
 ```
 
-### Destinations and Sources
+4. Double-click on your `.mil` file and enjoy! If the directories you are migrating require elevated permissions, such as `%ProgramFiles%`, you will need to right-click and select "**Run as administrator**" to ensure the necessary access privileges.
+
+## Profile Format
+
+The profile file follows the INI format.
+
+### MappingDirectory and StorageDirectory
 
 Use angle brackets `<>` in the path to access environment variables. The following two paths are equivalent.
 
@@ -40,16 +44,12 @@ Use angle brackets `<>` in the path to access environment variables. The followi
 C:\Program Files (x86)\Common Files\Adobe
 ```
 
-### Keeping Rules
+### Operation
 
-- **KeepDestination**: Deletes the source directory to the recycle bin and replaces it with a link pointing to the target directory.
-- **KeepSource**: Moves the source to the target directory and creates a link at the original source path, pointing to the target directory.
-- **KeepNothing**: Deletes the content of both the source and target directories. Then, creates a link at the original source path, pointing to the already empty target directory.
+- **Move**: Migrates the `MappingDirectory` to the `StorageDirectory` and links it, then changes the `Operation` to `Map` after the first run.
+- **Map**: Links the `MappingDirectory` to the `StorageDirectory`, and clears the `MappingDirectory` if it is not empty.
+- **Erase**: Links the `MappingDirectory` to the `StorageDirectory` and clears both the `MappingDirectory` and `StorageDirectory`.
 
-### Delimiters
+## License
 
-The destination path, source path, and keeping rules are separated by the pipe `|` symbol.
-
-```
-<SystemDrive>\Programs\Postman | <LocalAppData>\Postman | KeepDestination
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
