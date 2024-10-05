@@ -2,7 +2,7 @@
 
 🌍 **[简体中文](README-CN.md) | [English](README.md)**
 
-The Data Migrator is a practical tool for conveniently and quickly migrating data files.
+A practical tool for conveniently and quickly migrating data files.
 
 ## Usage
 
