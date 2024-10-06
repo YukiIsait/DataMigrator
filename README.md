@@ -2,7 +2,7 @@
 
 🌍 **[简体中文](README-CN.md) | [English](README.md)**
 
-A practical tool for conveniently and quickly migrating data files.
+A convenient and fast data migration tool for batch migrating application data to other locations and creating links at the original location to ensure the migrated programs work properly.
 
 ## Usage
 
