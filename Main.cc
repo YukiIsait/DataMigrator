@@ -9,11 +9,6 @@
 
 int Win32::EntryPoint::Main(const std::vector<std::wstring>& args) {
     try {
-        if (Win32::MessageBox::Show(L"Do you want to proceed with the migration?", L"Data Migrator",
-                                    static_cast<uint32_t>(Win32::MessageBox::ButtonType::YesNo) |
-                                        static_cast<uint32_t>(Win32::MessageBox::IconType::Information)) == Win32::MessageBox::ReturnCode::No) {
-            return 0;
-        }
         std::optional<std::wstring> profileFileName;
         switch (args.size()) {
             case 0:
@@ -29,11 +24,20 @@ int Win32::EntryPoint::Main(const std::vector<std::wstring>& args) {
             default:
                 throw std::runtime_error("Invalid number of arguments provided.");
         }
+        if (Win32::FileUtil::Exists(*profileFileName)) {
+            if (Win32::MessageBox::Show(L"Do you want to proceed with the migration?", L"Data Migrator",
+                                        static_cast<uint32_t>(Win32::MessageBox::ButtonType::YesNo) |
+                                        static_cast<uint32_t>(Win32::MessageBox::IconType::Information)) == Win32::MessageBox::ReturnCode::No) {
+                return 0;
+            }
+        } else {
+            throw std::runtime_error("Profile file for migration does not exist.");
+        }
         Business::MigrationTool::Migrate(*profileFileName);
         Win32::MessageBox::Show(L"All directories have been successfully migrated.", L"Migration completed", static_cast<uint32_t>(Win32::MessageBox::IconType::Information));
         return 0;
     } catch (const std::exception& exception) {
-        Win32::MessageBox::Show(exception.what(), "Migration failed", static_cast<uint32_t>(Win32::MessageBox::IconType::Error));
+        Win32::MessageBox::Show(exception.what(), "Migration Failed", static_cast<uint32_t>(Win32::MessageBox::IconType::Error));
         return 1;
     }
 }
