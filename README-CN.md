@@ -89,8 +89,8 @@ C:\Program Files (x86)\Common Files\Adobe
 ### Operation
 
 - **Move**: 将 **MappingDirectory** 迁移到 **StorageDirectory** 并链接，然后在首次运行后将 **Operation** 更改为 **Map**。
+- **Erase**: 将 **MappingDirectory** 链接到 **StorageDirectory** 并清空 **MappingDirectory** 和 **StorageDirectory**，然后在首次运行后将 **Operation** 更改为 **Map**。
 - **Map**: 将 **MappingDirectory** 链接到 **StorageDirectory**，如果 **MappingDirectory** 非空则清空。
-- **Erase**: 将 **MappingDirectory** 链接到 **StorageDirectory**，并清空 **MappingDirectory** 和 **StorageDirectory**。
 
 ## 许可证
 

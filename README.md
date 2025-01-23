@@ -47,8 +47,8 @@ C:\Program Files (x86)\Common Files\Adobe
 ### Operation
 
 - **Move**: Migrates the `MappingDirectory` to the `StorageDirectory` and links it, then changes the `Operation` to `Map` after the first run.
-- **Map**: Links the `MappingDirectory` to the `StorageDirectory`, and clears the `MappingDirectory` if it is not empty.
-- **Erase**: Links the `MappingDirectory` to the `StorageDirectory` and clears both the `MappingDirectory` and `StorageDirectory`.
+- **Erase**: Links the `MappingDirectory` to the `StorageDirectory` and clears both the `MappingDirectory` and `StorageDirectory`, then changes the `Operation` to `Map` after the first run.
+- **Map**: Links the `MappingDirectory` to the `StorageDirectory` and clears the `MappingDirectory` if it is not empty.
 
 ## License
 
