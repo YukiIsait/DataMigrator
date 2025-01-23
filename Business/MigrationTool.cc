@@ -36,17 +36,7 @@ namespace Business {
                 // 迁移完成，改为映射
                 migrationInfo.operation = MigrationInfo::Operation::Map;
                 break;
-            case MigrationInfo::Operation::Map: // 仅清空映射目录
-                // 保证映射目录不存在
-                if (Win32::FileUtil::Exists(migrationInfo.mappingDirectory)) {
-                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.mappingDirectory);
-                }
-                // 保证存储目录存在
-                if (!Win32::FileUtil::Exists(migrationInfo.storageDirectory)) {
-                    Win32::FileUtil::CreateDirectoryTree(migrationInfo.storageDirectory);
-                }
-                break;
-            case MigrationInfo::Operation::Erase: // 全部清空
+            case MigrationInfo::Operation::Erase: // 全部清空后映射
                 // 保证映射目录不存在
                 if (Win32::FileUtil::Exists(migrationInfo.mappingDirectory)) {
                     Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.mappingDirectory);
@@ -56,6 +46,18 @@ namespace Business {
                     Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.storageDirectory);
                 }
                 Win32::FileUtil::CreateDirectoryTree(migrationInfo.storageDirectory);
+                // 清空完成，改为映射
+                migrationInfo.operation = MigrationInfo::Operation::Map;
+                break;
+            case MigrationInfo::Operation::Map: // 仅清空映射目录
+                // 保证映射目录不存在
+                if (Win32::FileUtil::Exists(migrationInfo.mappingDirectory)) {
+                    Win32::FileUtil::RemoveDirectoryByShell(migrationInfo.mappingDirectory);
+                }
+                // 保证存储目录存在
+                if (!Win32::FileUtil::Exists(migrationInfo.storageDirectory)) {
+                    Win32::FileUtil::CreateDirectoryTree(migrationInfo.storageDirectory);
+                }
                 break;
             default:
                 throw std::runtime_error("Invalid migration operation.");
